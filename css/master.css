@@ -28,3 +28,8 @@ a:hover {
 .checked {
     color: orange;
 }
+
+.car-item{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
