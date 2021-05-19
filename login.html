@@ -24,6 +24,12 @@
 
     <!-- Angular Core JavaScript -->
     <script src="./node_modules/angular/angular.min.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
@@ -33,14 +39,19 @@
       <h2 class="active"> Sign In </h2>
       <h2 class="inactive underlineHover">Sign Up </h2>
   
-
-  
       <!-- Login Form -->
-      <form action="profile.html">
+      <div>
+        <input type="text" id="email" class="fadeIn second" name="email" placeholder="email">
+        <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+        <input type="submit" id="loginBtn" class="fadeIn fourth" value="Log In">
+      </div>
+
+      <!-- Login Form -->
+      <!-- <form action="profile.html">
         <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
         <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
         <input type="submit" class="fadeIn fourth" value="Log In" >
-      </form>
+      </form> -->
   
       <!-- Remind Passowrd -->
       <div id="formFooter">
@@ -54,8 +65,6 @@
 
 
 </form>
-
-  <script src="http:"></script>
 
   <script src="js/index.js"></script>
 
