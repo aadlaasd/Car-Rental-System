@@ -178,11 +178,11 @@
         console.log("Current car id: " + currentCarId);
 
         $.ajax({
-        url: "https://carrent-backend.herokuapp.com/cars/" + currentCarId,
-        type: "get",
-        success: function(result){
-            let carsBlock = $("#car-info");
-            console.log(result[0]);
+            url: "https://carrent-backend.herokuapp.com/cars/" + currentCarId,
+            type: "get",
+            success: function(result){
+                let carsBlock = $("#car-info");
+                console.log(result[0]);
                 carsBlock.append(
                 `
                     <div class="container">
@@ -201,29 +201,55 @@
                                 </div>
                             </div>
                         </div>
-                        <h1>Book</h1>
-                        <div class="col">
-                            <label for="firstname"><strong>Name:</strong></label>
-                            <input class="form-control" type="text" name="firstname" id="firstname" required/>
-                                <p>
-                        </div>
-                        <div class="col">
-                            <label for="firstname"><strong>Last Name:</strong></label>
-                            <input class="form-control" type="text" name="firstname" id="firstname" required/>
-                        </div>
                         <div class="container d-flex align-items-center">
-                            <button style="margin-top: 20px;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                            <button onclick="bookBtnClick()" style="margin-top: 20px;" type="button" class="btn btn-primary">
                                 Book
                             </button>
                         </div>
                     </div>
                 `
-            );
-        },
-        error: function(result){
+                );
+            },
+            error: function(result){
 
+            }
+        });
+
+        const bookBtnClick = () => {
+            let customerId = JSON.parse(localStorage.getItem("currentUser"))['id'];
+            let currentDate = new Date();
+            
+            let dd = currentDate.getDate();
+            if(dd < 10) dd = '0' + dd;
+            
+            let mm = currentDate.getMonth()+1;
+            if(mm < 10) mm = '0' + mm;
+            
+            let yy = currentDate.getFullYear();
+
+            let hours = currentDate.getHours();
+            let min = currentDate.getMinutes();
+            let sec = currentDate.getSeconds();
+
+            let currentDateStr = yy + "-" + mm + "-" + dd + " " + hours + ":" + min + ":" + sec;
+            console.log("Time: " + currentDateStr);
+
+            $.ajax({
+                url: "https://carrent-backend.herokuapp.com/startRent/",
+                type: "post",
+                data: {
+                    customer_id: customerId,
+                    car_id: currentCarId,
+                    date_from: currentDateStr
+                },
+                success: function(result){
+                    console.log("Order successfully started");
+                },
+                error: function(result){
+                    console.log("Something went wrong!");
+                }
+            });
         }
-    });
     </script>
 </body>
 

@@ -12,6 +12,7 @@ let loginBtn = document.getElementById("loginBtn");
         },
         success: function(result){
           let currentUser = {
+            id: result[0].id,
             email: result[0].email,
             password: result[0].password,
             name: result[0].name,
