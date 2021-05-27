@@ -14,6 +14,11 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.js"></script>
     <script src="js/profile.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous">
+    </script>
     <style>
         body {
             background-color: #eaeaea;
@@ -144,28 +149,8 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="list-group cars-list">
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                              <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Lexus LX570</h5>
-                                <small>3 days ago</small>
-                              </div>
-                              <small>57$</small>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                              <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Mersedes</h5>
-                                <small class="text-muted">21.12.2020</small>
-                              </div>
-                              <small class="text-muted">37$</small>
-                            </a>
-                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                              <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Audi</h5>
-                                <small class="text-muted">29.10.2020</small>
-                              </div>
-                              <small class="text-muted">47$</small>
-                            </a>
-                          </div>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -173,7 +158,26 @@
     </div>
 
     <script>
-        
+        let carsBlock = $("#cars-list");
+        $.ajax({
+            url: "",
+            method: "get",
+            success: function(response){
+                for(let i = 0; i < response.length; i++){
+                    carsBlock.append(`
+                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                            <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">${response[i].model}</h5>
+                            <small class="text-muted">${response[i].from_date}</small>
+                            </div>
+                            <small class="text-muted">
+                                <button>Stop rent</button>    
+                            </small>
+                        </a>
+                    `);
+                }
+            }
+        });
     </script>
 </body>
 </html>
