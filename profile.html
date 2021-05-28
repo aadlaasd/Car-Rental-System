@@ -148,7 +148,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <div class="list-group cars-list">
+                        <div class="list-group" id="cars-list">
                             
                         </div>
                     </div>
@@ -160,24 +160,42 @@
     <script>
         let carsBlock = $("#cars-list");
         $.ajax({
-            url: "",
-            method: "get",
+            url: "https://carrent-backend.herokuapp.com/usercars",
+            method: "post",
+            data: {
+                customerId: JSON.parse(localStorage.getItem("currentUser"))['id']
+            },
             success: function(response){
+                console.log(response);
                 for(let i = 0; i < response.length; i++){
                     carsBlock.append(`
                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                             <div class="d-flex w-100 justify-content-between">
                             <h5 class="mb-1">${response[i].model}</h5>
-                            <small class="text-muted">${response[i].from_date}</small>
+                            <small class="text-muted">${response[i].date_from}</small>
                             </div>
                             <small class="text-muted">
-                                <button>Stop rent</button>    
+                                <button onclick="stopRent(${response[i].id},${response[i].car_id} )">Stop rent</button>    
                             </small>
                         </a>
                     `);
                 }
             }
         });
+
+        const stopRent = (orderId, carId) => {
+            $.ajax({
+            url: "https://carrent-backend.herokuapp.com/stopRent",
+            method: "post",
+            data: {
+                orderId: orderId,
+                carId: carId
+            },
+            success: function(response){
+                location.reload()
+            }
+        });
+        }
     </script>
 </body>
 </html>
