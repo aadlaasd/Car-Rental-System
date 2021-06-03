@@ -92,10 +92,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-8">
-                                        <span class="text-muted">Email:</span> <span id="emailspan">email@test.com</span><br>
-                                        <span class="text-muted">Birth year:</span> <span id="dobspanspan">1996</span><br>
-                                        <span class="text-muted">Gender:</span> <span id="genderspan">null</span><br>
-                                        <span class="text-muted">Phone Number:</span> <span id="phonespan">123456789</span><br>
+                                        <span class="text-muted">Email:</span> <span id="emailSpan"></span><br>
+                                        <span class="text-muted">Name:</span> <span id="nameSpan"></span><br>
+                                        <span class="text-muted">Address:</span> <span id="addressSpan"></span><br>
+                                        <span class="text-muted">Phone Number:</span> <span id="phoneSpan"></span><br>
                                         <!--<small class="text-muted">Created: 01.01.2015</small>-->
                                     </div>
                                 </div>
@@ -158,6 +158,23 @@
     </div>
 
     <script>
+        //<span class="text-muted">Email:</span> <span id="emailSpan"></span><br>
+        //<span class="text-muted">Name:</span> <span id="nameSpan"></span><br>
+        //<span class="text-muted">Address:</span> <span id="addressSpan"></span><br>
+        //<span class="text-muted">Phone Number:</span> <span id="phoneSpan"></span><br>
+
+        $.ajax({
+            url: "https://carrent-backend.herokuapp.com/customers/" + JSON.parse(localStorage.getItem("currentUser"))['id'],
+            method: "get",
+            success: function(response){
+                console.log(response);
+                document.getElementById("emailSpan").innerHTML = response[0].email;
+                document.getElementById("nameSpan").innerHTML = response[0].name;
+                document.getElementById("addressSpan").innerHTML = response[0].address;
+                ldocument.getElementById("phoneSpan").innerHTML = response[0].number;
+            }
+        });
+
         let carsBlock = $("#cars-list");
         $.ajax({
             url: "https://carrent-backend.herokuapp.com/usercars",
@@ -209,7 +226,8 @@
                 currentDate: currentDateStr
             },
             success: function(response){
-                location.reload()
+                alert("Total sum: " + response.totalPrice);
+                location.reload();
             }
         });
         }
