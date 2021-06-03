@@ -184,12 +184,29 @@
         });
 
         const stopRent = (orderId, carId) => {
+            let currentDate = new Date();
+            
+            let dd = currentDate.getDate();
+            if(dd < 10) dd = '0' + dd;
+            
+            let mm = currentDate.getMonth()+1;
+            if(mm < 10) mm = '0' + mm;
+            
+            let yy = currentDate.getFullYear();
+
+            let hours = currentDate.getHours();
+            let min = currentDate.getMinutes();
+            let sec = currentDate.getSeconds();
+
+            let currentDateStr = yy + "-" + mm + "-" + dd + " " + hours + ":" + min + ":" + sec;
+
             $.ajax({
             url: "https://carrent-backend.herokuapp.com/stopRent",
             method: "post",
             data: {
                 orderId: orderId,
-                carId: carId
+                carId: carId,
+                currentDate: currentDateStr
             },
             success: function(response){
                 location.reload()
