@@ -67,20 +67,8 @@
                             <span class="fas fa-search"></span> Discover
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="upload-car.html">
-                            <span class="fas fa-car"></span> Оffer
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="contact-us.html">
-                            <span class="far fa-user-circle"></span> Contact us
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="login.html">
-                            <span class="far fa-user-circle"></span> Log in
-                        </a>
+                    <li id="profileBlock" class="nav-item">
+                        
                     </li>
                 </ul>
             </div>
@@ -191,8 +179,27 @@
 </body>
 
 <script>
+    let profileBlock = document.getElementById("profileBlock");
+
+    if(localStorage.getItem("currentUser")){
+        profileBlock.innerHTML = `
+            <a class="nav-link js-scroll-trigger" href="profile.html">
+                <span class="far fa-user-circle">Profile</span>
+            </a>
+        `
+    }else{
+        profileBlock.innerHTML = `
+            <a class="nav-link js-scroll-trigger" href="login.html">
+                <span class="far fa-user-circle">Log in</span>
+            </a>
+        `
+    }
 
     function searchCars(){
+        let carsBlock = $("#cars-block");
+
+        carsBlock.empty();
+
         let carClass = document.getElementById("classSelect").value;
         let carStatus = document.getElementById("statusSelect").value;
 
@@ -206,8 +213,7 @@
             type: "post",
             data: data,
             success: function(result){
-                let carsBlock = $("#cars-block");
-
+                console.log(result);
                 for(let i = 0; i < result.length; i++){
                     if(result[i].status === true){
                         carsBlock.append(
@@ -223,7 +229,7 @@
                                                 <h4>${result[i].model}</h4>
                                                 <p class="text-black-50 mb-0">
                                                     <strong>Color: </strong>${result[i].color} <br/>
-                                                    <strong>Status: </strong>${result[i].status} <br/>
+                                                    <strong>Status: </strong>${result[i].status === true ? "Free" : "Not free"} <br/>
                                                     <strong>Price: </strong>${result[i].price}KZT per minute <br/>
                                                 </p>
                                                 <div class="container d-flex h-100 align-items-center">
@@ -271,7 +277,7 @@
                 }
             },
             error: function(result){
-
+                console.log("fetching error");
             }
         });
     }

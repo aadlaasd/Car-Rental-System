@@ -49,20 +49,8 @@
                             <span class="fas fa-search"></span> Discover
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="upload-car.html">
-                            <span class="fas fa-car"></span> Оffer
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="contact-us.html">
-                            <span class="far fa-user-circle"></span> Contact us
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="login.html">
-                            <span class="far fa-user-circle"></span> Log in
-                        </a>
+                    <li id="profileBlock" class="nav-item">
+                        
                     </li>
                 
                 </ul>
@@ -277,6 +265,24 @@
             <a href="impressum.html">Impressum</a>
         </div>
     </footer>
+
+    <script>
+        let profileBlock = document.getElementById("profileBlock");
+
+        if(localStorage.getItem("currentUser")){
+            profileBlock.innerHTML = `
+                <a class="nav-link js-scroll-trigger" href="profile.html">
+                    <span class="far fa-user-circle">Profile</span>
+                </a>
+            `
+        }else{
+            profileBlock.innerHTML = `
+                <a class="nav-link js-scroll-trigger" href="login.html">
+                    <span class="far fa-user-circle">Log in</span>
+                </a>
+            `
+        }
+    </script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>

@@ -49,20 +49,8 @@
 								<span class="fas fa-search"></span> Discover
 							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link js-scroll-trigger" href="upload-car.html">
-								<span class="fas fa-car"></span> Оffer
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link js-scroll-trigger" href="login.html">
-								<span class="far fa-user-circle"></span> Log in
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link js-scroll-trigger" href="contact-us.html">
-								<span class="far fa-user-circle"></span> Contact us
-							</a>
+						<li id="profileBlock" class="nav-item">
+							
 						</li>
 					</ul>
 				</div>
@@ -174,6 +162,24 @@
 			</div>
 		</div>
 	</section>
+
+	<script>
+		let profileBlock = document.getElementById("profileBlock");
+
+		if(localStorage.getItem("currentUser")){
+			profileBlock.innerHTML = `
+				<a class="nav-link js-scroll-trigger" href="profile.html">
+					<span class="far fa-user-circle">Profile</span>
+				</a>
+			`
+		}else{
+			profileBlock.innerHTML = `
+				<a class="nav-link js-scroll-trigger" href="login.html">
+					<span class="far fa-user-circle">Log in</span>
+				</a>
+			`
+		}
+	</script>
 
 	<script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>

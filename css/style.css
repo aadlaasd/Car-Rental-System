@@ -69,11 +69,11 @@ h2 {
 
 /* TABS */
 
-h2.inactive {
+.inactive {
   color: #cccccc;
 }
 
-h2.active {
+.active {
   color: #0d0d0d;
   border-bottom: 2px solid #5fbae9;
 }

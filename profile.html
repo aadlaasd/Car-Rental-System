@@ -61,7 +61,7 @@
                         <ul class="dropdown-menu">
                             <!--<li><a href="#">Wallet</a></li>-->
                             <!--<li class="divider"></li>-->
-                            <li><a href="index.html">Logout</a></li>
+                            <li><a onclick="logout()">Logout</a></li>
                         </ul>
                     </div>
                 </li>
@@ -80,14 +80,11 @@
                             <div class="col-md-12 lead">User profile<hr></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 text-center">
-                                <img width="120" height="120" class="img-circle avatar avatar-original" style="-webkit-user-select:none;
-              display:block; margin:auto;" src="https://s3.amazonaws.com/whisperinvest-images/default.png">
-                            </div>
+                            
                             <div class="col-md-8">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h1 class="only-bottom-margin"> <span id="namesnamespan">User Name</span></h1>
+                                        <h1 class="only-bottom-margin"> <span id="namesnamespan">User information</span></h1>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -95,17 +92,12 @@
                                         <span class="text-muted">Email:</span> <span id="emailSpan"></span><br>
                                         <span class="text-muted">Name:</span> <span id="nameSpan"></span><br>
                                         <span class="text-muted">Address:</span> <span id="addressSpan"></span><br>
-                                        <span class="text-muted">Phone Number:</span> <span id="phoneSpan"></span><br>
                                         <!--<small class="text-muted">Created: 01.01.2015</small>-->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <hr><a data-toggle="modal" data-target="#dataUpdaterModal" href="#" class="btn btn-default pull-right"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -158,10 +150,10 @@
     </div>
 
     <script>
-        //<span class="text-muted">Email:</span> <span id="emailSpan"></span><br>
-        //<span class="text-muted">Name:</span> <span id="nameSpan"></span><br>
-        //<span class="text-muted">Address:</span> <span id="addressSpan"></span><br>
-        //<span class="text-muted">Phone Number:</span> <span id="phoneSpan"></span><br>
+        function logout(){
+            localStorage.removeItem("currentUser");
+            location.href = "login.html";
+        }
 
         $.ajax({
             url: "https://carrent-backend.herokuapp.com/customers/" + JSON.parse(localStorage.getItem("currentUser"))['id'],
